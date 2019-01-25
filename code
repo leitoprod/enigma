@@ -1,0 +1,188 @@
+
+#include "stdafx.h"
+#include <clocale>
+#include <iomanip>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+int rofl(int active)
+{
+	if (active == 0) { active = 24; return active; }
+	if (active == 1) { active = 17; return active; }
+	if (active == 2) { active = 20; return active; }
+	if (active == 3) { active = 7; return active; }
+	if (active == 4) { active = 16; return active; }
+	if (active == 5) { active = 18; return active; }
+	if (active == 6) { active = 11; return active; }
+	if (active == 7) { active = 3; return active; }
+	if (active == 8) { active = 15; return active; }
+	if (active == 9) { active = 23; return active; }
+	if (active == 10) { active = 13; return active; }
+	if (active == 11) { active = 6; return active; }
+	if (active == 12) { active = 14; return active; }
+	if (active == 13) { active = 10; return active; }
+	if (active == 14) { active = 12; return active; }
+	if (active == 15) { active = 8; return active; }
+	if (active == 16) { active = 4; return active; }
+	if (active == 17) { active = 1; return active; }
+	if (active == 18) { active = 5; return active; }
+	if (active == 19) { active = 25; return active; }
+	if (active == 20) { active = 2; return active; }
+	if (active == 21) { active = 22; return active; }
+	if (active == 22) { active = 21; return active; }
+	if (active == 23) { active = 9; return active; }
+	if (active == 24) { active = 0; return active; }
+	if (active == 25) { active = 19; return active; }
+	return active;
+}
+char print(int active, char printtxt)
+{
+	if (active == 0) { printtxt = 'a'; return printtxt; }
+	if (active == 1) { printtxt = 'b'; return printtxt; }
+	if (active == 2) { printtxt = 'c'; return printtxt; }
+	if (active == 3) { printtxt = 'd'; return printtxt; }
+	if (active == 4) { printtxt = 'e'; return printtxt; }
+	if (active == 5) { printtxt = 'f'; return printtxt; }
+	if (active == 6) { printtxt = 'g'; return printtxt; }
+	if (active == 7) { printtxt = 'h'; return printtxt; }
+	if (active == 8) { printtxt = 'i'; return printtxt; }
+	if (active == 9) { printtxt = 'j'; return printtxt; }
+	if (active == 10) { printtxt = 'k'; return printtxt; }
+	if (active == 11) { printtxt = 'l'; return printtxt; }
+	if (active == 12) { printtxt = 'm'; return printtxt; }
+	if (active == 13) { printtxt = 'n'; return printtxt; }
+	if (active == 14) { printtxt = 'o'; return printtxt; }
+	if (active == 15) { printtxt = 'p'; return printtxt; }
+	if (active == 16) { printtxt = 'q'; return printtxt; }
+	if (active == 17) { printtxt = 'r'; return printtxt; }
+	if (active == 18) { printtxt = 's'; return printtxt; }
+	if (active == 19) { printtxt = 't'; return printtxt; }
+	if (active == 20) { printtxt = 'u'; return printtxt; }
+	if (active == 21) { printtxt = 'v'; return printtxt; }
+	if (active == 22) { printtxt = 'w'; return printtxt; }
+	if (active == 23) { printtxt = 'x'; return printtxt; }
+	if (active == 24) { printtxt = 'y'; return printtxt; }
+	if (active == 25) { printtxt = 'z'; return printtxt; }
+	return printtxt;
+}
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int start1, start2, start3, active, i;
+	char r;
+	char printtxt = 0;
+	ofstream out("enigma.txt");
+	//fout << "Работа с файлами в С++"; // запись строки в файл
+	//cout << "Введите стратовую позицию для быстрого ротера: ";	
+	//cout << "Введите стратовую позицию для среднего ротера: ";
+	//cout << "Введите стратовую позицию для медленного ротера: ";
+
+
+
+	int rot0[26] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
+	int rot1[26] = { 4, 10, 12, 5, 11, 6, 3, 16, 21, 25, 13, 19, 14, 22, 24, 7, 23, 20, 18, 15, 0, 8, 1, 17, 2, 9 };//медл  I
+	int rot2[26] = { 0, 9, 3, 10, 18, 8, 17, 20, 23, 1, 11, 7, 22, 19, 12, 2, 16, 6, 25, 13, 15, 24, 5, 21, 14, 4 };//сред  II
+	int rot3[26] = { 1, 3, 5, 7, 9, 11, 2, 15, 17, 19, 23, 21, 25, 13, 24, 4, 8, 22, 6, 0, 10, 12, 20, 18, 16, 14 };//быстр III
+
+
+	cout << "Введите стратовую позицию для быстрого ротера: ";
+	cin >> start3;
+	cout << "Введите стратовую позицию для среднего ротера: ";
+	cin >> start2;
+	cout << "Введите стратовую позицию для медленного ротера: ";
+	cin >> start1;
+	//cout << "Для остановки программы введите stop" << endl;
+
+
+	//    out << "Работа с файлами в С++";     // запись строки в файл
+	while (1)
+	{
+		cout << "Ввидите символ для кодирования: ";
+		cin >> r;
+		active = r - 97;														//в active пишем номер шифруемой буквы
+		if (active == -9)break;
+
+
+		start3++;
+		if (start3 > 25) { start3 = 0; start2++; }
+		if (start2 > 25) { start2 = 0; start1++; }
+		if (start1 > 25) { start1 = 0; start2 = 0; start3 = 0; }
+
+		active = active + start3;
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+
+
+		active = rot3[active];
+
+		active = active + (start2 - start3);
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+		active = rot2[active];
+
+		active = active + (start1 - start2);
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+		active = rot1[active];
+
+		active = active - start1;
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+		active = rofl(active);
+		//пол пути
+
+		active = active + start1;
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+		
+		i = 0;
+		while (1)
+		{
+			if (active == rot1[i]) { active = i; break; }
+			i++;
+		}
+
+		active = active - (start1 - start2);
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+		
+		i = 0;
+		while (1)
+		{
+			if (active == rot2[i]) { active = i; break; }
+			i++;
+		}
+
+		active = active - (start2 - start3);
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+		
+		i = 0;
+		while (1)
+		{
+			if (active == rot3[i]) { active = i; break; }
+			i++;
+		}
+
+		active = active - start3;
+		if (active > 25)active = active - 26;
+		if (active < 0)active = active + 26;
+
+
+		printtxt = print(active, printtxt);
+
+		out << printtxt << endl;
+
+
+	}
+
+
+
+
+	out.close();
+
+	//system("pause");
+	return 0;
+}
+
